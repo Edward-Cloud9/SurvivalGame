@@ -78,15 +78,9 @@ int main()
         
         // TODO: Handle boundry conditions
         //North works fine
-        std::cout << "To the north you see a " << map[x][(y + 1) % 20]->getShortDescription() << std::endl;
+        std::cout << "To the north you see a " << map[x][(y + 1 + 20) % 20]->getShortDescription() << std::endl;
         //South will bus error
-        //std::cout << "To the south you see a " << map[x][(y - 1 + 20) % 20]->getShortDescription() << std::endl;
-        if(map[x][y] == map[x][0])
-        {
-            std::cout << "To the south you see a " << map[x][20]->getShortDescription() << std::endl;
-        } else {
-            std::cout << "To the south you see a " << map[x][(y - 1 + 20) % 20]->getShortDescription() << std::endl;
-        }
+        std::cout << "To the south you see a " << map[x][(y - 1 + 20) % 20]->getShortDescription() << std::endl;
         //East will segmentation fault
         std::cout << "To the east you see a " << map[(x + 1 + 20) % 20][y]->getShortDescription() << std::endl;
         //West will bus error
@@ -99,16 +93,16 @@ int main()
         switch(playerChoice)
         {
             case NORTH:
-                player.setY(player.getY() + 1);
+                player.setY((player.getY() + 1 + 20) % 20);
                 break;
             case SOUTH:
-                player.setY(player.getY() - 1);
+                player.setY((player.getY() - 1 + 20) % 20);
                 break;
             case EAST:
-                player.setX(player.getX() + 1);
+                player.setX((player.getX() + 1 + 20) % 20);
                 break;
             case WEST:
-                player.setX(player.getX() - 1);
+                player.setX((player.getX() - 1 + 20) % 20);
                 break;
             default:
                 std::cout << "Invalid input found: " << playerChoice << std::endl;
